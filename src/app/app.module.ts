@@ -10,6 +10,8 @@ import { ListPage } from '../pages/list/list';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
+import { DishdetailPage } from '../pages/dishdetail/dishdetail';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +29,8 @@ import { baseURL } from '../shared/baseurl';
     ListPage,
     AboutPage,
     MenuPage,
-    ContactPage
+    ContactPage,
+    DishdetailPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { baseURL } from '../shared/baseurl';
     ListPage,
     AboutPage,
     MenuPage,
-    ContactPage
+    ContactPage,
+    DishdetailPage
   ],
   providers: [
     StatusBar,
