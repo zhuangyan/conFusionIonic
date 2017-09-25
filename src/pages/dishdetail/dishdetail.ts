@@ -1,8 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,ActionSheetController,ModalController } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
+import { CommentPage } from '../comment/comment';
+
 
 
 /**
@@ -24,10 +26,13 @@ export class DishdetailPage {
   favorite: boolean;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    @Inject('BaseURL') private BaseURL,
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     private favoriteservice: FavoriteProvider,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    public actionsheetCtrl: ActionSheetController,
+    public modalCtrl: ModalController,
+    @Inject('BaseURL') private BaseURL) {
     this.dish = navParams.get('dish');
     this.numcomments = this.dish.comments.length;
     let total = 0;
@@ -48,5 +53,45 @@ export class DishdetailPage {
       position: 'middle',
       duration: 3000}).present();
   }
+
+  openMenu() {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: 'Select Actions',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Add to Favorites',
+          handler: () => {
+            this.addToFavorites();
+          }
+        },
+        {
+          text: 'Add a Comment',
+          handler: () => {
+            this.openComment();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel', 
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  openComment() {
+        let modal = this.modalCtrl.create(CommentPage);
+        modal.onDidDismiss((item) => {
+          if(item){
+           this.dish.comments.push(item);
+         }
+    });
+        modal.present();
+      }
+      
 
 }
