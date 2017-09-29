@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 
 
 import { MyApp } from './app.component';
@@ -72,7 +74,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PromotionProvider,
     ProcessHttpmsgProvider,
     { provide: 'BaseURL', useValue: baseURL },
-    FavoriteProvider
+    FavoriteProvider,
+    LocalNotifications
     
   ]
 })
