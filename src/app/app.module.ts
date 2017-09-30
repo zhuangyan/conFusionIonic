@@ -33,6 +33,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Camera } from '@ionic-native/camera';
+import { Network } from '@ionic-native/network';
+
 
 
 
@@ -88,7 +90,8 @@ import { Camera } from '@ionic-native/camera';
     LocalNotifications,
     EmailComposer,
     SocialSharing,
-    Camera
+    Camera,
+    Network
     
   ]
 })
