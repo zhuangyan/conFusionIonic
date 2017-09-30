@@ -4,6 +4,8 @@ import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 import { CommentPage } from '../comment/comment';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 
 
@@ -32,7 +34,9 @@ export class DishdetailPage {
     private toastCtrl: ToastController,
     public actionsheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
-    @Inject('BaseURL') private BaseURL) {
+    @Inject('BaseURL') private BaseURL,
+    private socialSharing: SocialSharing) {
+      
     this.dish = navParams.get('dish');
     this.numcomments = this.dish.comments.length;
     let total = 0;
@@ -54,7 +58,7 @@ export class DishdetailPage {
       duration: 3000}).present();
   }
 
-  openMenu() {
+  presentActionSheet() {
     let actionSheet = this.actionsheetCtrl.create({
       title: 'Select Actions',
       cssClass: 'action-sheets-basic-page',
@@ -69,6 +73,22 @@ export class DishdetailPage {
           text: 'Add a Comment',
           handler: () => {
             this.openComment();
+          }
+        },
+        {
+          text: 'Share via Facebook',
+          handler: () => {
+            this.socialSharing.shareViaFacebook(this.dish.name + ' -- ' + this.dish.description, this.BaseURL + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Facebook'))
+              .catch(() => console.log('Failed to post to Facebook'));
+          }
+        },
+        {
+          text: 'Share via Twitter',
+          handler: () => {
+            this.socialSharing.shareViaTwitter(this.dish.name + ' -- ' + this.dish.description, this.BaseURL + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Twitter'))
+              .catch(() => console.log('Failed to post to Twitter'));
           }
         },
         {
@@ -91,7 +111,6 @@ export class DishdetailPage {
          }
     });
         modal.present();
-      }
-      
+  }     
 
 }

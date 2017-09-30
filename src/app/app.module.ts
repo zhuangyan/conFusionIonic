@@ -29,6 +29,8 @@ import { baseURL } from '../shared/baseurl';
 import { FavoriteProvider } from '../providers/favorite/favorite';
 import { IonicStorageModule } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 
 
@@ -78,7 +80,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     { provide: 'BaseURL', useValue: baseURL },
     FavoriteProvider,
     LocalNotifications,
-    EmailComposer
+    EmailComposer,
+    SocialSharing
     
   ]
 })
