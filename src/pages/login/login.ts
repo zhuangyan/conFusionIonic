@@ -71,4 +71,11 @@ export class LoginPage {
       this.storage.remove('user');
     this.viewCtrl.dismiss();
   }
+
+  openRegister() {
+    let modal = this.modalCtrl.create(RegisterPage);
+    modal.present();
+    modal.onDidDismiss(() => this.dismiss())
+  }
+
 }
